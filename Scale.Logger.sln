@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30324.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scale.Logger", "Scale.Logger.csproj", "{27AC0A48-F234-49FE-8AA5-12A04415941D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{27AC0A48-F234-49FE-8AA5-12A04415941D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27AC0A48-F234-49FE-8AA5-12A04415941D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27AC0A48-F234-49FE-8AA5-12A04415941D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27AC0A48-F234-49FE-8AA5-12A04415941D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
