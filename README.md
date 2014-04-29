@@ -1,4 +1,4 @@
 Logger
 ======
 
-Ridiculously simple, supremely opinionated Logging library.
+Ridiculously simple, highly opinionated Logging library for .NET.
