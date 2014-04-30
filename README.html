@@ -1,3 +1,52 @@
 <h1>Logger</h1>
 
 <p>Ridiculously simple, highly opinionated Logging library for .NET.</p>
+
+<h2>Usage</h2>
+
+<p>Instantiate a new <strong>LoggerRegistry</strong> and assign to a static property, or inject into your classes using IoC.</p>
+
+<p><code>csharp
+public static ILoggerRegistry LoggerRegistry = new LoggerRegistry();
+</code></p>
+
+<p>Get an instance of <strong>ILogger</strong> by calling the <strong>Logger()</strong> method of <strong>LoggerRegistry</strong>. The <strong>Logger()</strong> method takes a key as string, which 
+you should generate using the <strong>MakeKey()</strong> helper method provided. <strong>MakeKey()</strong> accepts a param array of Ids that will be concatenated
+into a key; something like "aaa.bbb.ccc".</p>
+
+<p><code>csharp
+private ILogger _log = LoggerRegistry.Logger(LoggerRegistry.MakeKey("MyProject", "MyClass", "SomeId"));
+</code></p>
+
+<p>If an instance of <strong>ILogger</strong> with that key has been instantiated before (within the lifetime of the <strong>LoggerRegistry</strong>) it will be 
+returned, otherwise a new instance will be created.</p>
+
+<p>Now you can use the instance of <strong>ILogger</strong> to log messages in your code, e.g.</p>
+
+<p><code>csharp
+foreach (var image in images)
+{
+    _log.Message("Importing image {0}", new object[] { image });
+    // ... etc
+}
+</code></p>
+
+<p>There are three methods (plus overloads) that support three log levels:</p>
+
+<ul>
+<li><strong>Message()</strong></li>
+<li><strong>Info()</strong></li>
+<li><strong>Error()</strong></li>
+</ul>
+
+<p>All accept a message string, which may be a format string. If you want to provide args for the format string, put them in an 
+object array (param arrays are not supported by these methods).</p>
+
+<p><strong>Error()</strong> will also take just an <strong>Exception</strong>, or an <strong>Exception</strong> and a message. The exception's stack trace will be written to 
+the log in full.</p>
+
+<h2>Output</h2>
+
+<p>The log messages are formatted and written to the <strong>System.Diagnostics.Trace.WriteLine()</strong> method. You may configure where and 
+how Trace information is logged by configuring <strong><a href="http://msdn.microsoft.com/en-us/library/vstudio/system.diagnostics.tracelistener">TraceListener</a></strong>'s. Otherwise the default TraceListener will be used. This usually 
+means you will see the log output in your Output window in Visual Studio, or in your Test runner output and/or logs.</p>

@@ -3,7 +3,7 @@
     /// <summary>
     /// A registry for instances of Logger.
     /// </summary>
-    public interface ILogRegistry
+    public interface ILoggerRegistry
     {
         /// <summary>
         /// Gets an ILogger named by key.

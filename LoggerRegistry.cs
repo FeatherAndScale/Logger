@@ -8,7 +8,7 @@ namespace Scale.Logger
     /// <summary>
     /// A registry for instances of Logger.
     /// </summary>
-    public class LogRegistry : ILogRegistry
+    public class LoggerRegistry : ILoggerRegistry
     {
         private readonly IDictionary<string, ILogger> _instances = new ConcurrentDictionary<string, ILogger>();
 
@@ -19,8 +19,10 @@ namespace Scale.Logger
         /// <returns>An instance of an ILogger</returns>
         public ILogger Logger(string key)
         {
+            if (string.IsNullOrEmpty(key)) throw new ArgumentNullException("key");
+
             ILogger value;
-            if (_instances.ContainsKey(key)) if (_instances.TryGetValue(key, out value)) return value;
+            if (_instances.TryGetValue(key, out value)) return value;
 
             var logger = new TraceLogger(key);
             _instances.Add(key, logger);
