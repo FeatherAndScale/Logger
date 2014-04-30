@@ -7,6 +7,15 @@ Prerequisite
 -------------
 .NET Framework 4.5.
 
+Installation
+------------
+Logger is a [Nuget package](https://www.nuget.org/packages/FeatherAndScale.Logger).
+
+```
+PM> Install-Package FeatherAndScale.Logger
+```
+
+
 Usage
 -----
 
