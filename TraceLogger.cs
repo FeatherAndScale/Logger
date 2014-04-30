@@ -56,7 +56,7 @@ namespace Scale.Logger
         {
             string message = exception == null ? "(Exception is null)" : exception.Message;
             Trace.WriteLine(FormatLine("ERROR", filePath, memberName, lineNumber, message));
-            if (exception != null)
+            if (exception != null && exception.StackTrace != null)
             {
                 Trace.WriteLine(FormatLine("ERROR", filePath, memberName, lineNumber, exception.StackTrace,
                     new object[] { }));
@@ -72,8 +72,13 @@ namespace Scale.Logger
             Trace.WriteLine(FormatLine("ERROR", filePath, memberName, lineNumber, message, args));
             if (exception != null)
             {
-                Trace.WriteLine(FormatLine("ERROR", filePath, memberName, lineNumber, exception.StackTrace,
-                    new object[] {}));
+                Trace.WriteLine(FormatLine("ERROR", filePath, memberName, lineNumber, exception.Message));
+
+                if (exception.StackTrace != null)
+                {
+                    Trace.WriteLine(FormatLine("ERROR", filePath, memberName, lineNumber, exception.StackTrace,
+                        new object[] {}));
+                }
             }
         }
 

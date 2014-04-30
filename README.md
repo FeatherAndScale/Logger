@@ -3,6 +3,10 @@ Logger
 
 Ridiculously simple, highly opinionated Logging library for .NET.
 
+Prerequisite
+-------------
+.NET Framework 4.5.
+
 Usage
 -----
 
@@ -44,6 +48,9 @@ object array (param arrays are not supported by these methods).
 
 **Error()** will also take just an **Exception**, or an **Exception** and a message. The exception's stack trace will be written to 
 the log in full.
+
+Each method also accepts arguments decorated with [Caller Member Attributes](http://msdn.microsoft.com/en-us/library/system.runtime.compilerservices.callermembernameattribute.aspx)
+These arguments will be set by the compiler, you do not need to set them explicitly.
 
 Output
 ------

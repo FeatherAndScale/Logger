@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.30324.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scale.Logger", "Scale.Logger.csproj", "{27AC0A48-F234-49FE-8AA5-12A04415941D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scale.Logger.Tests", "Tests\Scale.Logger.Tests\Scale.Logger.Tests.csproj", "{7F563EA2-479D-4A51-9075-B622EBA1C15C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{27AC0A48-F234-49FE-8AA5-12A04415941D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{27AC0A48-F234-49FE-8AA5-12A04415941D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{27AC0A48-F234-49FE-8AA5-12A04415941D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F563EA2-479D-4A51-9075-B622EBA1C15C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F563EA2-479D-4A51-9075-B622EBA1C15C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F563EA2-479D-4A51-9075-B622EBA1C15C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F563EA2-479D-4A51-9075-B622EBA1C15C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

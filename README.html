@@ -2,6 +2,10 @@
 
 <p>Ridiculously simple, highly opinionated Logging library for .NET.</p>
 
+<h2>Prerequisite</h2>
+
+<p>.NET Framework 4.5.</p>
+
 <h2>Usage</h2>
 
 <p>Instantiate a new <strong>LoggerRegistry</strong> and assign to a static property, or inject into your classes using IoC.</p>
@@ -44,6 +48,9 @@ object array (param arrays are not supported by these methods).</p>
 
 <p><strong>Error()</strong> will also take just an <strong>Exception</strong>, or an <strong>Exception</strong> and a message. The exception's stack trace will be written to 
 the log in full.</p>
+
+<p>Each method also accepts arguments decorated with <a href="http://msdn.microsoft.com/en-us/library/system.runtime.compilerservices.callermembernameattribute.aspx">Caller Member Attributes</a>
+These arguments will be set by the compiler, you do not need to set them explicitly.</p>
 
 <h2>Output</h2>
 
