@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Text;
+using Common.Logging;
 
 namespace Scale.Logger
 {
@@ -11,6 +12,12 @@ namespace Scale.Logger
     public class LoggerRegistry : ILoggerRegistry
     {
         private readonly IDictionary<string, ILogger> _instances = new ConcurrentDictionary<string, ILogger>();
+
+        static LoggerRegistry()
+        {
+            LogManager.Adapter = new Common.Logging.Simple.TraceLoggerFactoryAdapter(LogLevel.Trace, false, true, true,
+                "dd-MMM-YYYY", false);
+        }
 
         /// <summary>
         /// Gets an ILogger named by key.
@@ -24,7 +31,7 @@ namespace Scale.Logger
             ILogger value;
             if (_instances.TryGetValue(key, out value)) return value;
 
-            var logger = new TraceLogger(key);
+            var logger = GetLogger(key);
             _instances.Add(key, logger);
 
             return logger;
@@ -45,6 +52,11 @@ namespace Scale.Logger
                 builder.Append(ids[i]);
             }
             return builder.ToString();
+        }
+
+        protected internal ILogger GetLogger(string key)
+        {
+            return new TraceLogger(key, LogManager.GetLogger(key));
         }
     }
 }

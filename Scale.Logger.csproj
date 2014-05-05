@@ -30,6 +30,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Common.Logging">
+      <HintPath>packages\Common.Logging.2.2.0\lib\net40\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging.Core">
+      <HintPath>packages\Common.Logging.Core.2.2.0\lib\net40\Common.Logging.Core.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -48,7 +54,9 @@
   <ItemGroup>
     <None Include=".gitignore" />
     <None Include="LICENSE" />
+    <None Include="packages.config" />
     <None Include="README.md" />
+    <None Include="Scale.Logger.nuspec" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="README.html">

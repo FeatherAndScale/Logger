@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Diagnostics;
 using System.IO;
 using System.Runtime.CompilerServices;
+using Common.Logging;
 
 namespace Scale.Logger
 {
@@ -10,10 +10,15 @@ namespace Scale.Logger
     /// </summary>
     public class TraceLogger : ILogger
     {
-        public TraceLogger(string key)
+        private readonly ILog _commonLog;
+
+        public TraceLogger(string key, ILog commonLog)
         {
             if (string.IsNullOrEmpty(key)) throw new ArgumentNullException("key");
+            if (commonLog == null) throw new ArgumentNullException("commonLog");            
+            
             Key = key;
+            _commonLog = commonLog;
         }
 
         /// <summary>
@@ -27,7 +32,7 @@ namespace Scale.Logger
         public void Message(string message, object[] args = null, [CallerFilePath] string filePath = "", [CallerMemberName] string memberName = "",
             [CallerLineNumber] int lineNumber = 0)
         {
-            Trace.WriteLine(FormatLine("", filePath, memberName, lineNumber, message, args));
+            _commonLog.Trace(FormatLine(filePath, memberName, lineNumber, message, args));
         }
 
         /// <summary>
@@ -36,7 +41,7 @@ namespace Scale.Logger
         public void Info(string message, object[] args = null, [CallerFilePath] string filePath = "", [CallerMemberName] string memberName = "",
             [CallerLineNumber] int lineNumber = 0)
         {
-            Trace.WriteLine(FormatLine("INFO", filePath, memberName, lineNumber, message, args));
+            _commonLog.Info(FormatLine(filePath, memberName, lineNumber, message, args));
         }
 
         /// <summary>
@@ -45,7 +50,7 @@ namespace Scale.Logger
         public void Error(string message, object[] args = null, [CallerFilePath] string filePath = "", [CallerMemberName] string memberName = "",
             [CallerLineNumber] int lineNumber = 0)
         {
-            Trace.WriteLine(FormatLine("ERROR", filePath, memberName, lineNumber, message, args));
+            _commonLog.Error(FormatLine(filePath, memberName, lineNumber, message, args));
         }
 
         /// <summary>
@@ -55,12 +60,7 @@ namespace Scale.Logger
             [CallerLineNumber] int lineNumber = 0)
         {
             string message = exception == null ? "(Exception is null)" : exception.Message;
-            Trace.WriteLine(FormatLine("ERROR", filePath, memberName, lineNumber, message));
-            if (exception != null && exception.StackTrace != null)
-            {
-                Trace.WriteLine(FormatLine("ERROR", filePath, memberName, lineNumber, exception.StackTrace,
-                    new object[] { }));
-            }
+            _commonLog.Error(FormatLine(filePath, memberName, lineNumber, message), exception);
         }
 
         /// <summary>
@@ -69,17 +69,7 @@ namespace Scale.Logger
         public void Error(Exception exception, string message, object[] args = null, [CallerFilePath] string filePath = "", [CallerMemberName] string memberName = "",
             [CallerLineNumber] int lineNumber = 0)
         {
-            Trace.WriteLine(FormatLine("ERROR", filePath, memberName, lineNumber, message, args));
-            if (exception != null)
-            {
-                Trace.WriteLine(FormatLine("ERROR", filePath, memberName, lineNumber, exception.Message));
-
-                if (exception.StackTrace != null)
-                {
-                    Trace.WriteLine(FormatLine("ERROR", filePath, memberName, lineNumber, exception.StackTrace,
-                        new object[] {}));
-                }
-            }
+            _commonLog.Error(FormatLine(filePath, memberName, lineNumber, message, args), exception);
         }
 
         private string FormatCallerFilePath(string filePath)
@@ -87,11 +77,10 @@ namespace Scale.Logger
             return Path.GetFileNameWithoutExtension(filePath);
         }
 
-        private string FormatLine(string level, string filePath, string memberName, int lineNumber, string message, object[] args = null)
+        private string FormatLine(string filePath, string memberName, int lineNumber, string message, object[] args = null)
         {
-            string levelLabel = string.IsNullOrEmpty(level) ? "" : level + ": ";
             if (args == null) args = new object[] {};
-            return string.Format("{0}Logger({1})\t{2}.{3}(),{4}\t{5}", levelLabel, Key, FormatCallerFilePath(filePath), memberName, lineNumber,
+            return string.Format("{0}.{1}(),{2}\t{3}", FormatCallerFilePath(filePath), memberName, lineNumber,
                 string.Format(message, args));
         }
     }

@@ -65,3 +65,23 @@ These arguments will be set by the compiler, you do not need to set them explici
 <p>The log messages are formatted and written to the <strong>System.Diagnostics.Trace.WriteLine()</strong> method. You may configure where and 
 how Trace information is logged by configuring <strong><a href="http://msdn.microsoft.com/en-us/library/vstudio/system.diagnostics.tracelistener">TraceListener</a></strong>'s. Otherwise the default TraceListener will be used. This usually 
 means you will see the log output in your Output window in Visual Studio, or in your Test runner output and/or logs.</p>
+
+<p><strong>Sample output:</strong>
+```
+[TRACE] Example.Key - TraceLoggerTests.MessageTest(),18 This is a message
+vstest.executionengine.x86.exe Information: 0 : [INFO]  Example.Key - TraceLoggerTests.InfoTest(),30    This is an Info message
+vstest.executionengine.x86.exe Error: 0 : [ERROR] Example.Key - TraceLoggerTests.ErrorTestThrowException(),91   This is a thrown exception's message.
+=======================================================(inner most exception)===</p>
+
+<h1> (1) System.Exception</h1>
+
+<p>Thread ID : 10</p>
+
+<p>Message:
+"This is a thrown exception's message."</p>
+
+<p>Stack Trace:</p>
+
+<h1>   at Scale.Logger.Tests.TraceLoggerTests.ErrorTestThrowException() in c:\Github\Logger\Tests\Scale.Logger.Tests\TraceLoggerTests.cs:line 86</h1>
+
+<p>```</p>

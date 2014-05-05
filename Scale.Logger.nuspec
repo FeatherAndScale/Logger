@@ -2,15 +2,15 @@
 <package >
   <metadata>
     <id>FeatherAndScale.Logger</id>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <title>FeatherAndScale/Logger</title>
     <authors>Daniel Larsen</authors>
-    <owners>Daniel Larsen</owners>
+    <owners>FeatherAndScale</owners>
     <licenseUrl>https://github.com/FeatherAndScale/Logger/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/FeatherAndScale/Logger</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Ridiculously simple, highly opinionated Logging library for .NET.</description>
-    <releaseNotes>This is the first release of FeatherAndScale.Logger.</releaseNotes>
+    <releaseNotes>Now uses Common.Logger TraceLogger.</releaseNotes>
     <copyright>Copyright 2014</copyright>
     <tags>Logger Logging .NET</tags>
   </metadata>

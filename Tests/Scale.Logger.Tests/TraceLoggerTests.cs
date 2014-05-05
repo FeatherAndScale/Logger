@@ -11,7 +11,8 @@ namespace Scale.Logger.Tests
         public void MessageTest()
         {
             // Arrange
-            var logger = new TraceLogger("abc123");
+            var logger = new LoggerRegistry().GetLogger("abc123");
+            //var logger = new TraceLogger("abc123");
             
             // Act
             logger.Message("This is a message");
@@ -23,10 +24,10 @@ namespace Scale.Logger.Tests
         public void InfoTest()
         {
             // Arrange
-            var logger = new TraceLogger("abc123");
+            var logger = new LoggerRegistry().GetLogger("abc123");
             
             // Act
-            logger.Info("This is a Info message");
+            logger.Info("This is an Info message");
             logger.Info("InfoTest is running on TraceLogger #{0}.", new object[] {logger.Key});            
         }
 	
@@ -35,11 +36,11 @@ namespace Scale.Logger.Tests
         public void ErrorTest()
         {
             // Arrange
-            var logger = new TraceLogger("abc123");
+            var logger = new LoggerRegistry().GetLogger("abc123");
             
             // Act
-            logger.Error("This is a Error message");
-            logger.Error("ErrroTest is running on TraceLogger #{0}.", new object[] {logger.Key});            
+            logger.Error("This is an Error message");
+            logger.Error("ErrrorTest is running on TraceLogger #{0}.", new object[] {logger.Key});            
         }
 	
         [TestMethod]
@@ -47,7 +48,7 @@ namespace Scale.Logger.Tests
         public void ErrorTestWithExceptionAndMessage()
         {
             // Arrange
-            var logger = new TraceLogger("abc123");
+            var logger = new LoggerRegistry().GetLogger("abc123");
             
             // Act
             logger.Error(new Exception("this is an exception's message"), "ErrorTest is running on TraceLogger #{0}.",
@@ -59,7 +60,7 @@ namespace Scale.Logger.Tests
         public void ErrorTestThrowExceptionWithMessage()
         {
             // Arrange
-            var logger = new TraceLogger("abc123");
+            var logger = new LoggerRegistry().GetLogger("abc123");
 
             try
             {
@@ -78,7 +79,7 @@ namespace Scale.Logger.Tests
         public void ErrorTestThrowException()
         {
             // Arrange
-            var logger = new TraceLogger("abc123");
+            var logger = new LoggerRegistry().GetLogger("abc123");
 
             try
             {
@@ -96,12 +97,32 @@ namespace Scale.Logger.Tests
         public void ErrorTestWithException()
         {
             // Arrange
-            var logger = new TraceLogger("abc123");
+            var logger = new LoggerRegistry().GetLogger("abc123");
             
             // Act
             logger.Error(new Exception("this is an exception's message"));
         }
-	
 
+        [TestMethod]
+        [TestCategory("integration")]
+        public void ErrorTestWithNullException()
+        {
+            // Arrange
+            var logger = new LoggerRegistry().GetLogger("abc123");
+            
+            // Act
+            logger.Error((Exception)null);
+        }
+
+        [TestMethod]
+        [TestCategory("integration")]
+        public void ErrorTestWithNullExceptionAndMessage()
+        {
+            // Arrange
+            var logger = new LoggerRegistry().GetLogger("abc123");
+            
+            // Act
+            logger.Error(null, "this is a message", new object[] {});
+        }
     }
 }

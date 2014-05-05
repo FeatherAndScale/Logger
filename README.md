@@ -67,3 +67,21 @@ Output
 The log messages are formatted and written to the **System.Diagnostics.Trace.WriteLine()** method. You may configure where and 
 how Trace information is logged by configuring **[TraceListener](http://msdn.microsoft.com/en-us/library/vstudio/system.diagnostics.tracelistener)**'s. Otherwise the default TraceListener will be used. This usually 
 means you will see the log output in your Output window in Visual Studio, or in your Test runner output and/or logs.
+
+**Sample output:**
+```
+[TRACE] Example.Key - TraceLoggerTests.MessageTest(),18	This is a message
+vstest.executionengine.x86.exe Information: 0 : [INFO]  Example.Key - TraceLoggerTests.InfoTest(),30	This is an Info message
+vstest.executionengine.x86.exe Error: 0 : [ERROR] Example.Key - TraceLoggerTests.ErrorTestThrowException(),91	This is a thrown exception's message.
+=======================================================(inner most exception)===
+ (1) System.Exception
+================================================================================
+Thread ID : 10
+
+Message:
+"This is a thrown exception's message."
+
+Stack Trace:
+   at Scale.Logger.Tests.TraceLoggerTests.ErrorTestThrowException() in c:\Github\Logger\Tests\Scale.Logger.Tests\TraceLoggerTests.cs:line 86
+================================================================================
+```
